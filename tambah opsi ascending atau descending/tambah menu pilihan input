@@ -6,7 +6,7 @@ vector<int> arr, B;
 int n;
 bool ascending = true;
 
-// Input data (dengan opsi default)
+// Input data (manual atau default)
 void input(bool useDefault = false) 
 {
     if (useDefault) 
@@ -14,8 +14,8 @@ void input(bool useDefault = false)
         arr = {10, 3, 7, 2, 9, 5};
         n = arr.size();
         B.resize(n);
-        ascending = true; // default ascending
-        cout << "Menggunakan array default untuk uji coba.\n";
+        ascending = true;
+        cout << "Menggunakan array default.\n";
         return;
     }
 
@@ -72,8 +72,13 @@ void output()
 
 int main() 
 {
-    // true = gunakan array default untuk test cepat
-    input(true);
+    int mode;
+    cout << "Pilih mode input:\n1. Manual\n2. Default\nPilihan: ";
+    cin >> mode;
+
+    if (mode == 2) input(true);
+    else input(false);
+
     mergeSort(0, n - 1);
     output();
     return 0;
