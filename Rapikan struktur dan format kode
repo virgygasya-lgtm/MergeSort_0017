@@ -4,10 +4,11 @@ using namespace std;
 int arr[20], B[20];
 int n;
 
-// Fungsi input data dengan validasi ukuran array
+// Input data dengan validasi ukuran
 void input() 
 {
-    do {
+    do 
+    {
         cout << "Masukkan panjang array (<=20): ";
         cin >> n;
     } while (n > 20);
@@ -19,17 +20,15 @@ void input()
     }
 }
 
-// Fungsi merge sort (rekursif + penggabungan)
+// Merge Sort rekursif
 void mergeSort(int low, int high) 
 {
-    if (low >= high) return; // kondisi dasar rekursi
+    if (low >= high) return;
     int mid = (low + high) / 2;
 
-    // rekursi untuk bagian kiri dan kanan
     mergeSort(low, mid);
     mergeSort(mid + 1, high);
 
-    // proses penggabungan dua bagian terurut
     int i = low, j = mid + 1, k = low;
     while (i <= mid && j <= high) 
     {
@@ -38,22 +37,25 @@ void mergeSort(int low, int high)
     while (i <= mid) B[k++] = arr[i++];
     while (j <= high) B[k++] = arr[j++];
 
-    // salin hasil ke array utama
     for (int x = low; x <= high; x++) arr[x] = B[x];
 }
 
-// Fungsi output hasil akhir
+// Output hasil
 void output() 
 {
     cout << "\nHasil urut (Merge Sort): ";
-    for (int i = 0; i < n; i++) cout << arr[i] << " ";
+    for (int i = 0; i < n; i++) 
+    {
+        cout << arr[i] << " ";
+    }
     cout << endl;
 }
 
+// Fungsi utama
 int main() 
 {
-    input();              // baca data
-    mergeSort(0, n - 1);  // urutkan dengan merge sort
-    output();             // tampilkan hasil
+    input();
+    mergeSort(0, n - 1);
+    output();
     return 0;
 }
