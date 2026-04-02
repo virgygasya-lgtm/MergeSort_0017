@@ -4,7 +4,7 @@ using namespace std;
 int arr[20], B[20];
 int n;
 
-// Input data dengan validasi ukuran dan nilai
+// Input data
 void input() 
 {
     do 
@@ -14,33 +14,21 @@ void input()
 
         if (cin.fail() || n <= 0 || n > 20) 
         {
-            cin.clear();              // reset error flag
-            cin.ignore(1000, '\n');   // buang input salah
+            cin.clear();
+            cin.ignore(1000, '\n');
             cout << "Input tidak valid, coba lagi.\n";
-            n = 0; // reset agar loop lanjut
+            n = 0;
         }
     } while (n <= 0 || n > 20);
 
     for (int i = 0; i < n; i++) 
     {
-        while (true) 
-        {
-            cout << "Array[" << i << "] = ";
-            cin >> arr[i];
-            if (cin.fail()) 
-            {
-                cin.clear();
-                cin.ignore(1000, '\n');
-                cout << "Harus angka, coba lagi.\n";
-            } else 
-            {
-                break;
-            }
-        }
+        cout << "Array[" << i << "] = ";
+        cin >> arr[i];
     }
 }
 
-// Merge Sort rekursif
+// Merge Sort
 void mergeSort(int low, int high) 
 {
     if (low >= high) return;
@@ -63,12 +51,14 @@ void mergeSort(int low, int high)
 // Output hasil
 void output() 
 {
-    cout << "\nHasil urut (Merge Sort): ";
+    cout << "\n===============================" << endl;
+    cout << "   Hasil Pengurutan Merge Sort " << endl;
+    cout << "===============================\n";
     for (int i = 0; i < n; i++) 
     {
         cout << arr[i] << " ";
     }
-    cout << endl;
+    cout << "\n===============================\n";
 }
 
 int main() 
