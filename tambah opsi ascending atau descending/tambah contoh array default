@@ -4,11 +4,21 @@ using namespace std;
 
 vector<int> arr, B;
 int n;
-bool ascending = true; // default urut naik
+bool ascending = true;
 
-// Input data
-void input() 
+// Input data (dengan opsi default)
+void input(bool useDefault = false) 
 {
+    if (useDefault) 
+    {
+        arr = {10, 3, 7, 2, 9, 5};
+        n = arr.size();
+        B.resize(n);
+        ascending = true; // default ascending
+        cout << "Menggunakan array default untuk uji coba.\n";
+        return;
+    }
+
     cout << "Masukkan panjang array: ";
     cin >> n;
     arr.resize(n);
@@ -41,7 +51,8 @@ void mergeSort(int low, int high)
         if (ascending) 
         {
             B[k++] = (arr[i] <= arr[j]) ? arr[i++] : arr[j++];
-        } else {
+        } else 
+        {
             B[k++] = (arr[i] >= arr[j]) ? arr[i++] : arr[j++];
         }
     }
@@ -61,7 +72,8 @@ void output()
 
 int main() 
 {
-    input();
+    // true = gunakan array default untuk test cepat
+    input(true);
     mergeSort(0, n - 1);
     output();
     return 0;
