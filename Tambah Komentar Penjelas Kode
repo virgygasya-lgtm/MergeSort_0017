@@ -4,42 +4,56 @@ using namespace std;
 int arr[20], B[20];
 int n;
 
-void input() {
+// Fungsi input data dengan validasi ukuran array
+void input() 
+{
     do {
         cout << "Masukkan panjang array (<=20): ";
         cin >> n;
     } while (n > 20);
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) 
+    {
         cout << "Array[" << i << "] = ";
         cin >> arr[i];
     }
 }
 
-void mergeSort(int low, int high) {
-    if (low >= high) return;
+// Fungsi merge sort (rekursif + penggabungan)
+void mergeSort(int low, int high) 
+{
+    if (low >= high) return; // kondisi dasar rekursi
     int mid = (low + high) / 2;
+
+    // rekursi untuk bagian kiri dan kanan
     mergeSort(low, mid);
     mergeSort(mid + 1, high);
 
+    // proses penggabungan dua bagian terurut
     int i = low, j = mid + 1, k = low;
-    while (i <= mid && j <= high) {
+    while (i <= mid && j <= high) 
+    {
         B[k++] = (arr[i] <= arr[j]) ? arr[i++] : arr[j++];
     }
     while (i <= mid) B[k++] = arr[i++];
     while (j <= high) B[k++] = arr[j++];
+
+    // salin hasil ke array utama
     for (int x = low; x <= high; x++) arr[x] = B[x];
 }
 
-void output() {
+// Fungsi output hasil akhir
+void output() 
+{
     cout << "\nHasil urut (Merge Sort): ";
     for (int i = 0; i < n; i++) cout << arr[i] << " ";
     cout << endl;
 }
 
-int main() {
-    input();
-    mergeSort(0, n - 1);
-    output();
+int main() 
+{
+    input();              // baca data
+    mergeSort(0, n - 1);  // urutkan dengan merge sort
+    output();             // tampilkan hasil
     return 0;
 }
