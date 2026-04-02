@@ -4,9 +4,11 @@ using namespace std;
 
 vector<int> arr, B;
 int n;
+bool ascending = true; // default urut naik
 
 // Input data
-void input() {
+void input() 
+{
     cout << "Masukkan panjang array: ";
     cin >> n;
     arr.resize(n);
@@ -17,6 +19,11 @@ void input() {
         cout << "Array[" << i << "] = ";
         cin >> arr[i];
     }
+
+    char pilih;
+    cout << "Urutkan ascending (a) atau descending (d)? ";
+    cin >> pilih;
+    ascending = (pilih == 'a' || pilih == 'A');
 }
 
 // Merge Sort
@@ -31,7 +38,12 @@ void mergeSort(int low, int high)
     int i = low, j = mid + 1, k = low;
     while (i <= mid && j <= high) 
     {
-        B[k++] = (arr[i] <= arr[j]) ? arr[i++] : arr[j++];
+        if (ascending) 
+        {
+            B[k++] = (arr[i] <= arr[j]) ? arr[i++] : arr[j++];
+        } else {
+            B[k++] = (arr[i] >= arr[j]) ? arr[i++] : arr[j++];
+        }
     }
     while (i <= mid) B[k++] = arr[i++];
     while (j <= high) B[k++] = arr[j++];
