@@ -7,11 +7,11 @@ vector<int> arr, B;
 int n;
 bool ascending = true;
 
-// Input data
-void input(bool useDefault = false) 
+// Input data (manual, default, atau file)
+void input(int mode) 
 {
-    if (useDefault) 
-    {
+    if (mode == 2) 
+    { // default
         arr = {10, 3, 7, 2, 9, 5};
         n = arr.size();
         B.resize(n);
@@ -19,7 +19,25 @@ void input(bool useDefault = false)
         cout << "Menggunakan array default.\n";
         return;
     }
+    else if (mode == 3) { // file
+        ifstream file("input.txt");
+        if (file.is_open()) 
+        {
+            file >> n;
+            arr.resize(n);
+            B.resize(n);
+            for (int i = 0; i < n; i++) file >> arr[i];
+            ascending = true;
+            cout << "Data dibaca dari file input.txt\n";
+            file.close();
+            return;
+        } else 
+        {
+            cout << "File input.txt tidak ditemukan, gunakan input manual.\n";
+        }
+    }
 
+    // manual
     cout << "Masukkan panjang array: ";
     cin >> n;
     arr.resize(n);
@@ -38,7 +56,8 @@ void input(bool useDefault = false)
 }
 
 // Merge Sort
-void mergeSort(int low, int high) {
+void mergeSort(int low, int high) 
+{
     if (low >= high) return;
     int mid = (low + high) / 2;
 
@@ -62,30 +81,21 @@ void mergeSort(int low, int high) {
     for (int x = low; x <= high; x++) arr[x] = B[x];
 }
 
-// Output hasil ke layar dan file
+// Output hasil
 void output() 
 {
     cout << "\nHasil urut (Merge Sort): ";
-    ofstream file("output.txt");
-    for (int i = 0; i < n; i++) 
-    {
-        cout << arr[i] << " ";
-        file << arr[i] << " ";
-    }
+    for (int i = 0; i < n; i++) cout << arr[i] << " ";
     cout << endl;
-    file.close();
-    cout << "Hasil juga disimpan ke file output.txt\n";
 }
 
 int main() 
 {
     int mode;
-    cout << "Pilih mode input:\n1. Manual\n2. Default\nPilihan: ";
+    cout << "Pilih mode input:\n1. Manual\n2. Default\n3. File\nPilihan: ";
     cin >> mode;
 
-    if (mode == 2) input(true);
-    else input(false);
-
+    input(mode);
     mergeSort(0, n - 1);
     output();
     return 0;
